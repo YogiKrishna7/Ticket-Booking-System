@@ -3,13 +3,13 @@ package com.ticketbooking.app;
 import java.sql.*;
 import java.util.*;
 
-public class Ticket_Booking_DAO {
+public class Ticket_Booking_Services {
     Scanner input = new Scanner(System.in);
 
     Connection c;
 
 
-    public Ticket_Booking_DAO(Connection c) {
+    public Ticket_Booking_Services(Connection c) {
         this.c = c;
     }
 

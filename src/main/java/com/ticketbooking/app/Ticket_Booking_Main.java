@@ -9,7 +9,7 @@ public class Ticket_Booking_Main {
             Scanner input = new Scanner(System.in);
             Connection c = Connect.getConnected();
 
-            Ticket_Booking_DAO dao = new Ticket_Booking_DAO(c);
+            Ticket_Booking_Services dao = new Ticket_Booking_Services(c);
 
             // System.out.println("Enter name: ");
             // String name = input.nextLine();
