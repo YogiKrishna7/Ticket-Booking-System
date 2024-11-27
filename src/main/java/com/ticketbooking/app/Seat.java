@@ -5,6 +5,7 @@ public class Seat {
     int screenId;
     int seatNumber;
     int seatPrice;
+    
     public Seat(int seatId, int screenId, int seatNumber, int seatPrice) {
         this.seatId = seatId;
         this.screenId = screenId;
