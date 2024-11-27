@@ -34,7 +34,15 @@ public class TicketBookingMain {
 
             // dao.resetPassword(username, newpassword);
 
-            if (dao.authenticate("yogi7", "123")) {
+            /* Login */
+
+            System.out.println("Enter your username to login: ");
+            String loginUsername = input.nextLine();
+
+            System.out.println("Enter your password to login: ");
+            String loginPassword = input.nextLine();
+
+            if (dao.authenticate(loginUsername, loginPassword)) {
                 System.out.println("Authentication successful!");
 
                 /* Change password */
