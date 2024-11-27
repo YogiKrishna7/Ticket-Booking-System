@@ -42,8 +42,6 @@ public class TicketBookingDAO {
         }
     }
 
-    boolean login = false;
-
     boolean authenticate(String username, String password) {
         String query = "select * from users where user_name = ? and password = ?";
 
@@ -56,7 +54,6 @@ public class TicketBookingDAO {
 
             if (rs.next()) {
                 System.out.println("Login Successful");
-                login = true;
                 return true;
             } else {
                 System.out.println("User not found");
@@ -69,40 +66,38 @@ public class TicketBookingDAO {
     }
 
     void changePassword(String username, String currentPassword, String newPassword) {
-        if (login) {
-            String query = "select * from users where user_name = ? and password = ?";
 
-            try {
-                PreparedStatement ps = c.prepareStatement(query);
-                ps.setString(1, username);
-                ps.setString(2, currentPassword);
+        String query = "select * from users where user_name = ? and password = ?";
 
-                ResultSet rs = ps.executeQuery();
+        try {
+            PreparedStatement ps = c.prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, currentPassword);
 
-                if (rs.next()) {
-                    String newQuery = "update users set password = ? where user_name = ?;";
+            ResultSet rs = ps.executeQuery();
 
-                    PreparedStatement ps1 = c.prepareStatement(newQuery);
-                    ps1.setString(1, newPassword);
-                    ps1.setString(2, username);
+            if (rs.next()) {
+                String newQuery = "update users set password = ? where user_name = ?;";
 
-                    int done = ps1.executeUpdate();
+                PreparedStatement ps1 = c.prepareStatement(newQuery);
+                ps1.setString(1, newPassword);
+                ps1.setString(2, username);
 
-                    if (done > 0) {
-                        System.out.println("Password updated successfully");
-                    } else {
-                        System.out.println("Failed to update password");
-                    }
+                int done = ps1.executeUpdate();
+
+                if (done > 0) {
+                    System.out.println("Password updated successfully");
                 } else {
-                    System.out.println("User not found");
+                    System.out.println("Failed to update password");
                 }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } else {
+                System.out.println("User not found");
             }
-        } else {
-            System.out.println("log in first to change your password");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
     }
 
     void resetPassword(String username, String newPassword) {
@@ -139,30 +134,26 @@ public class TicketBookingDAO {
     List<Movie> searchByscreen(String theaterName) {
         List<Movie> screenList = new ArrayList<>();
 
-        if (login) {
-            String query = "select screen_name, movie_title, show_time, location from screens join showtimes on screens.screen_id = showtimes.screen_id join movies on showtimes.current_movie_id = movies.movie_id where location like ? order by show_time;";
+        String query = "select screen_name, movie_title, show_time, location from screens join showtimes on screens.screen_id = showtimes.screen_id join movies on showtimes.current_movie_id = movies.movie_id where location like ? order by show_time;";
 
-            try {
-                PreparedStatement ps = c.prepareStatement(query);
-                ps.setString(1, "%" + theaterName + "%");
+        try {
+            PreparedStatement ps = c.prepareStatement(query);
+            ps.setString(1, "%" + theaterName + "%");
 
-                ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
-                while (rs.next()) {
-                    String screenName = rs.getString("screen_name");
-                    String movieName = rs.getString("movie_title");
-                    String showTime = rs.getString("show_time");
-                    String location = rs.getString("location");
+            while (rs.next()) {
+                String screenName = rs.getString("screen_name");
+                String movieName = rs.getString("movie_title");
+                String showTime = rs.getString("show_time");
+                String location = rs.getString("location");
 
-                    Movie movie = new Movie(screenName, movieName, showTime, location);
-                    screenList.add(movie);
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
+                Movie movie = new Movie(screenName, movieName, showTime, location);
+                screenList.add(movie);
             }
-        } else {
-            System.out.println("log in first to search");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return screenList;
@@ -171,68 +162,63 @@ public class TicketBookingDAO {
     List<Movie> searchBymovie(String moviename) {
         List<Movie> movieList = new ArrayList<>();
 
-        if (login) {
-            String query = "select movie_title, screen_name, show_time, location from movies join showtimes on movies.movie_id = showtimes.current_movie_id join screens on showtimes.screen_id = screens.screen_id where movie_title like ? order by show_time;";
-            try {
-                PreparedStatement ps = c.prepareStatement(query);
-                ps.setString(1, "%" + moviename + "%");
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    String movieName = rs.getString("movie_title");
-                    String screenName = rs.getString("screen_name");
-                    String showTime = rs.getString("show_time");
-                    String location = rs.getString("location");
+        String query = "select movie_title, screen_name, show_time, location from movies join showtimes on movies.movie_id = showtimes.current_movie_id join screens on showtimes.screen_id = screens.screen_id where movie_title like ? order by show_time;";
+        try {
+            PreparedStatement ps = c.prepareStatement(query);
+            ps.setString(1, "%" + moviename + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String movieName = rs.getString("movie_title");
+                String screenName = rs.getString("screen_name");
+                String showTime = rs.getString("show_time");
+                String location = rs.getString("location");
 
-                    Movie movie = new Movie(screenName, movieName, showTime, location);
-                    movieList.add(movie);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                Movie movie = new Movie(screenName, movieName, showTime, location);
+                movieList.add(movie);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return movieList;
     }
 
     void selectShowtime(int choice, String searchMovieOrTheater) {
-        if (login) {
-            try {
-                List<Movie> list = new ArrayList<>();
 
-                if (choice == 1) {
-                    list = searchByscreen(searchMovieOrTheater);
-                } else if (choice == 2) {
-                    list = searchBymovie(searchMovieOrTheater);
-                }
+        try {
+            List<Movie> list = new ArrayList<>();
 
-                System.out.println("Available Movies and Showtimes:");
-
-                int i = 0;
-                for (Movie movie : list) {
-                    System.out.println(i + ". " + movie.getMovieTitle());
-                    System.out.println("Location: " + movie.getLocation());
-                    System.out.println("Screen: " + movie.getScreenName());
-                    System.out.println("Showtime: " + movie.getShowTime());
-                    System.out.println();
-                    i++;
-                }
-
-                System.out.print("Select a movie/showtime (enter number): ");
-                int showtimeChoice = input.nextInt();
-                input.nextLine();
-
-                Movie selectedMovie = list.get(showtimeChoice);
-
-                System.out.println("You have selected:");
-                System.out.println("Movie: " + selectedMovie.getMovieTitle());
-                System.out.println("Screen: " + selectedMovie.getScreenName());
-                System.out.println("Showtime: " + selectedMovie.getShowTime());
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (choice == 1) {
+                list = searchByscreen(searchMovieOrTheater);
+            } else if (choice == 2) {
+                list = searchBymovie(searchMovieOrTheater);
             }
-        } else {
-            System.out.println("log in first to select a showtime");
+
+            System.out.println("Available Movies and Showtimes:");
+
+            int i = 0;
+            for (Movie movie : list) {
+                System.out.println(i + ". " + movie.getMovieTitle());
+                System.out.println("Location: " + movie.getLocation());
+                System.out.println("Screen: " + movie.getScreenName());
+                System.out.println("Showtime: " + movie.getShowTime());
+                System.out.println();
+                i++;
+            }
+
+            System.out.print("Select a movie/showtime (enter number): ");
+            int showtimeChoice = input.nextInt();
+            input.nextLine();
+
+            Movie selectedMovie = list.get(showtimeChoice);
+
+            System.out.println("You have selected:");
+            System.out.println("Movie: " + selectedMovie.getMovieTitle());
+            System.out.println("Screen: " + selectedMovie.getScreenName());
+            System.out.println("Showtime: " + selectedMovie.getShowTime());
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

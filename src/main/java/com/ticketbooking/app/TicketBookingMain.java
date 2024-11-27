@@ -2,8 +2,6 @@ package com.ticketbooking.app;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class TicketBookingMain {
@@ -15,43 +13,44 @@ public class TicketBookingMain {
 
             User user = new User();
 
-            // // user registration / signup
+            /* user registration / signup */
 
-            user.setName("yogi");
-            user.setPhno("986670907");
-            user.setEmail("yogi@gmail.com");
-            user.setAddress("ram nagar");
-            user.setUserName("yogi7");
-            user.setPassword("123");
+            // user.setName("yogi");
+            // user.setPhno("986670907");
+            // user.setEmail("yogi@gmail.com");
+            // user.setAddress("ram nagar");
+            // user.setUserName("yogi7");
+            // user.setPassword("123");
 
-            dao.userRegister(user);
+            // dao.userRegister(user);
 
-            // // Reset Password
+            /* Reset Password */
 
-            System.out.println("Enter username: ");
-            String username = input.nextLine();
+            // System.out.println("Enter username: ");
+            // String username = input.nextLine();
 
-            System.out.println("Enter new password: ");
-            String newpassword = input.nextLine();
+            // System.out.println("Enter new password: ");
+            // String newpassword = input.nextLine();
 
-            dao.resetPassword(username, newpassword);
+            // dao.resetPassword(username, newpassword);
 
             if (dao.authenticate("yogi7", "123")) {
                 System.out.println("Authentication successful!");
 
-                // // Change password
-                System.out.println("Enter username: ");
-                String userName = input.nextLine();
+                /* Change password */
 
-                System.out.println("Enter cureent password: ");
-                String currentPassword = input.nextLine();
+                // System.out.println("Enter username: ");
+                // String userName = input.nextLine();
 
-                System.out.println("Enter new password: ");
-                String newPassword = input.nextLine();
+                // System.out.println("Enter cureent password: ");
+                // String currentPassword = input.nextLine();
 
-                dao.changePassword(userName, currentPassword, newPassword);
-                
-                // // Search movie and select
+                // System.out.println("Enter new password: ");
+                // String newPassword = input.nextLine();
+
+                // dao.changePassword(userName, currentPassword, newPassword);
+
+                /* Search movie and select */
 
                 System.out.println("Search By ?\n1)Screen\n2)Movie");
                 int choice = input.nextInt();
