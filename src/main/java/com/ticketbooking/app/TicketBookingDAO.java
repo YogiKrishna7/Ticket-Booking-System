@@ -27,7 +27,7 @@ public class TicketBookingDAO {
             ps.setString(2, user.getPhno());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getAddress());
-            ps.setString(5, user.getUserName());
+            ps.setString(5, user.getUser_name());
             ps.setString(6, user.getPassword());
 
             int done = ps.executeUpdate();
