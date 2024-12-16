@@ -4,6 +4,16 @@ create database ticket_booking;
 
 use ticket_booking;
 
+select * from users;
+-- select * from screens;
+-- select * from movies;
+-- select * from showtimes;
+-- select * from seats;
+-- select * from booking_statuses;
+-- select * from bookings;
+-- select * from payment_methods;
+-- select * from transactions;
+
 create table users (
     user_id int auto_increment primary key,
     first_name varchar(100),
@@ -13,6 +23,7 @@ create table users (
     address text,
     user_name varchar(100) unique,
     password varchar(100),
+    
     created_by varchar(100) default 'system',
     create_date timestamp default current_timestamp,
     modified_by varchar(100) default 'system',
@@ -27,6 +38,7 @@ create table screens (
     state varchar(100),
     country varchar(100),
     seating_capacity int,
+    
     created_by varchar(100) default 'system',
     create_date timestamp default current_timestamp,
     modified_by varchar(100) default 'system',
@@ -40,6 +52,7 @@ create table movies (
     rating varchar(20),
     release_date date,
     audio_language varchar(100),
+    
     created_by varchar(100) default 'system',
     create_date timestamp default current_timestamp,
     modified_by varchar(100) default 'system',
@@ -52,6 +65,7 @@ create table showtimes (
     show_time time,
     is_active char(1),  -- Using 'Y' for active, 'N' for inactive
     current_movie_id int,
+    
     created_by varchar(100) default 'system',
     create_date timestamp default current_timestamp,
     modified_by varchar(100) default 'system',
@@ -67,6 +81,7 @@ create table seats (
     screen_id int,
     seat_number varchar(5),
     seat_price int,
+    
     created_by varchar(100) default 'system',
     create_date timestamp default current_timestamp,
     modified_by varchar(100) default 'system',
@@ -80,6 +95,7 @@ create table booking_statuses (
     booking_status_code varchar(10),
     description text,
     display_name varchar(50),
+    
     created_by varchar(100) default 'system',
     create_date timestamp default current_timestamp,
     modified_by varchar(100) default 'system',
@@ -96,6 +112,7 @@ create table bookings (
     seat_id int,
     total_price int,
     booking_status_id int,
+    
     created_by varchar(100) default 'system',
     create_date timestamp default current_timestamp,
     modified_by varchar(100) default 'system',
