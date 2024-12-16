@@ -14,7 +14,13 @@
     <property name="show_sql">true</property>
 
     <mapping class="com.ticketbooking.app.User"/>
-    
-    <!-- <mapping resource="user.hbm.xml"/> -->
+    <mapping class="com.ticketbooking.app.Transaction"/>
+    <mapping class="com.ticketbooking.app.ShowTime"/>
+    <mapping class="com.ticketbooking.app.Seat"/>
+    <mapping class="com.ticketbooking.app.Screen"/>
+    <mapping class="com.ticketbooking.app.PaymentMethod"/>
+    <mapping class="com.ticketbooking.app.Movie"/>
+    <mapping class="com.ticketbooking.app.Booking"/>
+    <mapping class="com.ticketbooking.app.BookingStatus"/>
   </session-factory>
 </hibernate-configuration>

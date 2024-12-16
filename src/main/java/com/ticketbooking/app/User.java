@@ -11,138 +11,161 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // can use AUTO, SEQUENCE, or TABLE
-    @Column(name = "user_id")
-    private int userId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id")
+	private int userId;
 
-    private String name;
+	@Column(name = "first_name")
+	private String firstName;
 
-    private String phno;
+	@Column(name = "last_name")
+	private String lastName;
 
-    private String email;
+	@Column(name = "phno")
+	private String phno;
 
-    private String address;
+	@Column(name = "email")
+	private String email;
 
-    @Column(name = "user_name")
-    private String userName;
+	@Column(name = "address")
+	private String address;
 
-    private String password;
+	@Column(name = "user_name")
+	private String userName;
 
-    private String createdBy;
+	@Column(name = "password")
+	private String password;
 
-    private String createdDate;
+	@Column(name = "created_by")
+	private String createdBy = "system";
 
-    private String modifiedBy;
+	@Column(name = "create_date")
+	private String createDate;
 
-    private String modifiedDate;
+	@Column(name = "modified_by")
+	private String modifiedBy = "system";
 
-    public User() {
-        super();
-    }
+	@Column(name = "modified_date")
+	private String modifiedDate;
 
-    public User(int userId, String name, String phno, String email, String address, String userName, String password,
-                String createdBy, String createdDate, String modifiedBy, String modifiedDate) {
-        super();
-        this.userId = userId;
-        this.name = name;
-        this.phno = phno;
-        this.email = email;
-        this.address = address;
-        this.userName = userName;
-        this.password = password;
-        this.createdBy = createdBy;
-        this.createdDate = createdDate;
-        this.modifiedBy = modifiedBy;
-        this.modifiedDate = modifiedDate;
-    }
+	public User() {
+		super();
+	}
+
+	public User(int userId, String firstName, String lastName, String phno, String email, String address,
+			String userName, String password, String createdBy, String createDate,
+			String modifiedBy, String modifiedDate) {
+		super();
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phno = phno;
+		this.email = email;
+		this.address = address;
+		this.userName = userName;
+		this.password = password;
+		this.createdBy = createdBy;
+		this.createDate = createDate;
+		this.modifiedBy = modifiedBy;
+		this.modifiedDate = modifiedDate;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getPhno() {
+		return phno;
+	}
+
+	public void setPhno(String phno) {
+		this.phno = phno;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 
-    public int getUserId() {
-        return userId;
-    }
+	public String getCreatedBy() {
+		return createdBy;
+	}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getCreateDate() {
+		return createDate;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
 
-    public String getPhno() {
-        return phno;
-    }
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
 
-    public void setPhno(String phno) {
-        this.phno = phno;
-    }
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getModifiedDate() {
+		return modifiedDate;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setModifiedDate(String modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getModifiedBy() {
-        return modifiedBy;
-    }
-
-    public void setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-
-    public String getModifiedDate() {
-        return modifiedDate;
-    }
-
-    public void setModifiedDate(String modifiedDate) {
-        this.modifiedDate = modifiedDate;
-    }
 }

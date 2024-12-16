@@ -1,99 +1,189 @@
 package com.ticketbooking.app;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "bookings")
 public class Booking {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "booking_id")
     private int bookingId;
-    private int bookingNumber;
-    private int userId;
-    private int movieId;
-    private int showTimeId;
-    private int screenId;
-    private int seatId;
+
+    @Column(name = "booking_number")
+    private String bookingNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
+
+    @ManyToOne
+    @JoinColumn(name = "show_time_id")
+    private ShowTime showTime;
+
+    @ManyToOne
+    @JoinColumn(name = "screen_id")
+    private Screen screen;
+
+    @ManyToOne
+    @JoinColumn(name = "seat_id")
+    private Seat seat;
+
+    @Column(name = "total_price")
     private int totalPrice;
-    private int bookingStatusId;
 
-    public Booking(int bookingId, int bookingNumber, int userId, int movieId, int showTimeId, int screenId, int seatId,
-            int totalPrice, int bookingStatusId) {
-        this.bookingId = bookingId;
-        this.bookingNumber = bookingNumber;
-        this.userId = userId;
-        this.movieId = movieId;
-        this.showTimeId = showTimeId;
-        this.screenId = screenId;
-        this.seatId = seatId;
-        this.totalPrice = totalPrice;
-        this.bookingStatusId = bookingStatusId;
-    }
+    @ManyToOne
+    @JoinColumn(name = "booking_status_id")
+    private BookingStatus bookingStatus;
 
-    public int getBookingId() {
-        return bookingId;
-    }
+    @Column(name = "created_by")
+    private String createdBy = "system";
 
-    public void setBookingId(int bookingId) {
-        this.bookingId = bookingId;
-    }
+    @Column(name = "create_date")
+    private String createDate;
 
-    public int getBookingNumber() {
-        return bookingNumber;
-    }
+    @Column(name = "modified_by")
+    private String modifiedBy = "system";
 
-    public void setBookingNumber(int bookingNumber) {
-        this.bookingNumber = bookingNumber;
-    }
+    @Column(name = "modified_date")
+    private String modifiedDate;
 
-    public int getUserId() {
-        return userId;
-    }
+	public Booking() {
+	}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+	public Booking(int bookingId, String bookingNumber, User user, Movie movie, ShowTime showTime, Screen screen,
+			Seat seat, int totalPrice, BookingStatus bookingStatus, String createdBy, String createDate,
+			String modifiedBy, String modifiedDate) {
+		this.bookingId = bookingId;
+		this.bookingNumber = bookingNumber;
+		this.user = user;
+		this.movie = movie;
+		this.showTime = showTime;
+		this.screen = screen;
+		this.seat = seat;
+		this.totalPrice = totalPrice;
+		this.bookingStatus = bookingStatus;
+		this.createdBy = createdBy;
+		this.createDate = createDate;
+		this.modifiedBy = modifiedBy;
+		this.modifiedDate = modifiedDate;
+	}
 
-    public int getMovieId() {
-        return movieId;
-    }
+	public int getBookingId() {
+		return bookingId;
+	}
 
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
-    }
+	public void setBookingId(int bookingId) {
+		this.bookingId = bookingId;
+	}
 
-    public int getShowTimeId() {
-        return showTimeId;
-    }
+	public String getBookingNumber() {
+		return bookingNumber;
+	}
 
-    public void setShowTimeId(int showTimeId) {
-        this.showTimeId = showTimeId;
-    }
+	public void setBookingNumber(String bookingNumber) {
+		this.bookingNumber = bookingNumber;
+	}
 
-    public int getScreenId() {
-        return screenId;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public void setScreenId(int screenId) {
-        this.screenId = screenId;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public int getSeatId() {
-        return seatId;
-    }
+	public Movie getMovie() {
+		return movie;
+	}
 
-    public void setSeatId(int seatId) {
-        this.seatId = seatId;
-    }
+	public void setMovie(Movie movie) {
+		this.movie = movie;
+	}
 
-    public int getTotalPrice() {
-        return totalPrice;
-    }
+	public ShowTime getShowTime() {
+		return showTime;
+	}
 
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+	public void setShowTime(ShowTime showTime) {
+		this.showTime = showTime;
+	}
 
-    public int getBookingStatusId() {
-        return bookingStatusId;
-    }
+	public Screen getScreen() {
+		return screen;
+	}
 
-    public void setBookingStatusId(int bookingStatusId) {
-        this.bookingStatusId = bookingStatusId;
-    }
+	public void setScreen(Screen screen) {
+		this.screen = screen;
+	}
 
+	public Seat getSeat() {
+		return seat;
+	}
+
+	public void setSeat(Seat seat) {
+		this.seat = seat;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public BookingStatus getBookingStatus() {
+		return bookingStatus;
+	}
+
+	public void setBookingStatus(BookingStatus bookingStatus) {
+		this.bookingStatus = bookingStatus;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public String getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(String modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
+    
 }
